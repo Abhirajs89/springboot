@@ -1,7 +1,10 @@
 package com.abhiraj.rest.webservices.restfulwebservices.user;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -23,7 +26,13 @@ public class UserResource {
     }
 
     @PostMapping(path = "/users")
-    public void save(@RequestBody User user){
-        userService.save(user);
+    public ResponseEntity<User> save(@RequestBody User user){
+        User savedUser = userService.save(user);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedUser.getId())
+                .toUri();
+        return ResponseEntity.created(location).build();
     }
 }
