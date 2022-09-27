@@ -1,11 +1,17 @@
 package com.abhiraj.rest.webservices.restfulwebservices.user;
 
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.BatchSize;
+
 import java.time.LocalDate;
 
 public class User {
 
     private Integer id;
+    @Size(min=2,message = "Min 2 characters are required for Name")
     private String name;
+    @Past(message = "Birth Date should be in past")
     private LocalDate dob;
 
     public User(Integer id, String name, LocalDate dob) {
