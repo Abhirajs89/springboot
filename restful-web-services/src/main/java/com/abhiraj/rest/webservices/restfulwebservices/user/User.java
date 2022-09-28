@@ -1,13 +1,14 @@
 package com.abhiraj.rest.webservices.restfulwebservices.user;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
-import org.hibernate.annotations.BatchSize;
+import net.minidev.json.annotate.JsonIgnore;
+
 
 import java.time.LocalDate;
+import java.util.List;
+
 @Entity(name = "user_details")
 public class User {
     @Id
@@ -17,6 +18,11 @@ public class User {
     private String name;
     @Past(message = "Birth Date should be in past")
     private LocalDate dob;
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Post> posts;
+
 
     public User() {
     }
