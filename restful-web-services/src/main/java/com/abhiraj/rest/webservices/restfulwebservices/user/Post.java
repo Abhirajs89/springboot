@@ -1,7 +1,8 @@
 package com.abhiraj.rest.webservices.restfulwebservices.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import net.minidev.json.annotate.JsonIgnore;
+
 
 @Entity
 public class Post {
@@ -30,6 +31,14 @@ public class Post {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+   public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

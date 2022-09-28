@@ -1,9 +1,9 @@
 package com.abhiraj.rest.webservices.restfulwebservices.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
-import net.minidev.json.annotate.JsonIgnore;
 
 
 import java.time.LocalDate;
