@@ -31,7 +31,7 @@ public class UserJpaResource {
     @GetMapping(path = "/jpa/users/{id}")
     public EntityModel<User> retrieveUser (@PathVariable int id) {
         Optional<User> user = repository.findById(id);
-        if(user == null){
+        if(user.isEmpty()){
             throw new UserNotFoundException("id :"+id);
         }
         EntityModel<User> userEntityModel = EntityModel.of(user.get());
@@ -43,6 +43,16 @@ public class UserJpaResource {
     @DeleteMapping(path = "/jpa/users/{id}")
     public void deleteUser (@PathVariable int id) {
         repository.deleteById(id);
+    }
+
+    @GetMapping(path = "/jpa/users/{id}/posts")
+    public List<Post> retrievePostForUser (@PathVariable int id) {
+
+        Optional<User> user = repository.findById(id);
+        if(user.isEmpty()){
+            throw new UserNotFoundException("id :"+id);
+        }
+        return user.get().getPosts();
     }
 
     @PostMapping(path = "/jpa/users")
